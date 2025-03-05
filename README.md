@@ -1,1 +1,1 @@
-# neo-banking
+# swift-bank
