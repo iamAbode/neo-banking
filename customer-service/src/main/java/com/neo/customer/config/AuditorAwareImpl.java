@@ -1,4 +1,4 @@
-package com.neo.common.config;
+package com.neo.customer.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.AuditorAware;
@@ -8,13 +8,13 @@ import java.util.Optional;
 
 /**
  * @Author ABODE
- * @Date 2025/03/07 11:21 PM
+ * @Date 2025/03/08 10:59 AM
  */
 @Component
 @Slf4j
 public class AuditorAwareImpl implements AuditorAware<String> {
     @Override
     public Optional<String> getCurrentAuditor() {
-        return Optional.empty();
+        return Optional.of("Anonymous");
     }
 }

@@ -26,5 +26,5 @@ public class Address extends BaseEntity {
 
     private String street;
 
-    private String number;
+    private String houseNumber;
 }

@@ -12,6 +12,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>neo-common</name>
     <description>neo-common</description>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -36,6 +37,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>  <!-- Skip Boot plugin for this module -->
+                </configuration>
             </plugin>
         </plugins>
     </build>

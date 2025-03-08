@@ -2,10 +2,7 @@ package com.neo.customer.entity;
 
 import com.neo.common.entity.BaseEntity;
 import com.neo.common.enums.Gender;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +20,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer extends BaseEntity{
+
     @Column(nullable = false, unique = true)
     private String customerId;
 
@@ -35,10 +33,14 @@ public class Customer extends BaseEntity{
 
     private String phone;
 
-    private String address;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @NotNull
+    @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false)
+    private Address address;
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
 }
