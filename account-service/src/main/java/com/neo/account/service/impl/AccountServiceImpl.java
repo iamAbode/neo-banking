@@ -4,21 +4,26 @@ import com.neo.account.client.CustomerServiceClient;
 import com.neo.account.client.TransactionServiceClient;
 import com.neo.account.dto.AccountCreationResponse;
 import com.neo.account.dto.AccountCreationServiceParam;
-import com.neo.account.dto.CustomerAccountDTO;
 import com.neo.account.dto.TransactionRequest;
 import com.neo.account.entity.CustomerAccount;
 import com.neo.account.repository.CustomerAccountRepository;
 import com.neo.account.service.AccountService;
+import com.neo.account.service.NotificationService;
 import com.neo.account.util.AccountTransactionUtil;
+import com.neo.common.dto.CustomerAccountDTO;
 import com.neo.common.dto.CustomerDTO;
 import com.neo.common.dto.TransactionDTO;
 import com.neo.common.enums.AccountType;
+import com.neo.common.enums.EntityStatus;
 import com.neo.common.enums.PaymentMethod;
 import com.neo.common.enums.TransactionType;
+import com.neo.common.event.AccountCreationEvent;
 import com.neo.common.exception.ResourceNotFoundException;
 import com.neo.common.response.BaseResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -30,6 +35,7 @@ import java.util.List;
  * @Author ABODE
  * @Date 2025/03/08 1:36 PM
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
@@ -38,6 +44,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountTransactionUtil accountUtil;
     private final CustomerServiceClient customerServiceClient;
     private final TransactionServiceClient transactionServiceClient;
+    private final NotificationService kafkaNotificationService;
 
     @Override
     public List<CustomerAccountDTO> getAccounts() {
@@ -62,7 +69,7 @@ public class AccountServiceImpl implements AccountService {
             account.setBalance(transactionDTO.getAmount());
             updateAccountBalance(account);
         }
-
+        notityCustomer(account, customerDTO);
         return getAccountResponse(account, customerDTO);
     }
 
@@ -92,11 +99,24 @@ public class AccountServiceImpl implements AccountService {
         return response.getData();
     }
 
+    private void notityCustomer(CustomerAccount account, CustomerDTO customerDTO) {
+        kafkaNotificationService.sendMessage("account-creation", buildAccountCreationEvent(account, customerDTO));
+    }
+
+    private AccountCreationEvent buildAccountCreationEvent(CustomerAccount account, CustomerDTO customerDTO) {
+        return AccountCreationEvent.builder()
+                .name(customerDTO.getName()).surname(customerDTO.getSurname())
+                .email(customerDTO.getEmail()).accountNumber(account.getAccountNumber())
+                .accountType(account.getAccountType()).balance(account.getBalance())
+                .currency(account.getCurrency()).build();
+    }
+
     private TransactionRequest buildTransactionRequest(CustomerAccount account, BigDecimal initialCredit){
         return TransactionRequest.builder().customerId(account.getCustomerId())
                 .amount(initialCredit).fee(BigDecimal.ZERO).currency("NGN")
                 .paymentMethod(PaymentMethod.CASH).transactionType(TransactionType.CREDIT)
-                .transactionReference(generateReference()).settleInstantly(true)
+                .transactionReference(generateReference()).accountNumber(account.getAccountNumber())
+                .settleInstantly(true).status(EntityStatus.COMPLETED)
                 .narration("New account initial deposit").build();
     }
 
@@ -131,11 +151,5 @@ public class AccountServiceImpl implements AccountService {
         BeanUtils.copyProperties(entity, customerAccountDTO);
 
         return customerAccountDTO;
-    }
-
-    private CustomerAccount convertDataToEntity(CustomerAccountDTO data) {
-        CustomerAccount customerAccount = CustomerAccount.builder().build();
-        BeanUtils.copyProperties(data, customerAccount);
-        return customerAccount;
     }
 }

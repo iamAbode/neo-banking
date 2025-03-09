@@ -29,7 +29,7 @@ public class RestClientConfig {
     private ClientHttpRequestFactory getClientRequestFactory() {
         ClientHttpRequestFactorySettings settings = ClientHttpRequestFactorySettings.DEFAULTS
                 .withConnectTimeout(Duration.ofSeconds(3))
-                .withReadTimeout(Duration.ofSeconds(3));
+                .withReadTimeout(Duration.ofSeconds(5));
         return ClientHttpRequestFactories.get(settings);
     }
 }

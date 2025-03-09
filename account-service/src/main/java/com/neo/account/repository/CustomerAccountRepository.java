@@ -18,8 +18,6 @@ import java.util.Optional;
 @Repository
 public interface CustomerAccountRepository extends JpaRepository<CustomerAccount, Long> {
 
-    Optional<CustomerAccount> findFirstByCustomerId(String customerId);
-
     List<CustomerAccount> findByCustomerId(String customerId);
 
     @Modifying

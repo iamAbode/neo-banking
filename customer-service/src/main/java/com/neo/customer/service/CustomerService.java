@@ -1,6 +1,7 @@
 package com.neo.customer.service;
 
 import com.neo.common.dto.CustomerDTO;
+import com.neo.customer.dto.CustomerInformationResponse;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface CustomerService {
     CustomerDTO getCustomer(String customerId);
 
     CustomerDTO createCustomer(CustomerDTO customerDTO);
+
+    CustomerInformationResponse getCustomerInfo(String customerId);
 }

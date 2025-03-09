@@ -1,5 +1,6 @@
 package com.neo.transaction.dto;
 
+import com.neo.common.enums.EntityStatus;
 import com.neo.common.enums.PaymentMethod;
 import com.neo.common.enums.TransactionType;
 import jakarta.validation.constraints.*;
@@ -20,6 +21,9 @@ public class TransactionCreationRequest {
     @NotNull(message = "Amount is required")
     @Positive(message = "Amount must be greater than zero")
     private BigDecimal amount;
+
+    @NotNull(message = "Amount is required")
+    private String accountNumber;
 
     @NotBlank(message = "Transaction reference is required")
     @Size(max = 50, message = "Transaction reference cannot exceed 50 characters")
@@ -42,5 +46,7 @@ public class TransactionCreationRequest {
 
     @NotNull(message = "Payment method is required")
     private PaymentMethod paymentMethod;
+
+    private EntityStatus status;
 
 }

@@ -30,6 +30,8 @@ public class Transaction extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String transactionReference;
 
+    private String accountNumber;
+
     private String narration;
 
     @Enumerated(EnumType.STRING)

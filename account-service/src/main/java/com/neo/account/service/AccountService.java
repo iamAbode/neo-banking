@@ -2,7 +2,7 @@ package com.neo.account.service;
 
 import com.neo.account.dto.AccountCreationResponse;
 import com.neo.account.dto.AccountCreationServiceParam;
-import com.neo.account.dto.CustomerAccountDTO;
+import com.neo.common.dto.CustomerAccountDTO;
 
 import java.util.List;
 

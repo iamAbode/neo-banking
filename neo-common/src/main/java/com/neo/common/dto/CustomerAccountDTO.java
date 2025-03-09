@@ -1,12 +1,7 @@
-package com.neo.account.dto;
+package com.neo.common.dto;
 
-import com.neo.account.enums.AccountStatus;
 import com.neo.common.enums.AccountType;
 import com.neo.common.enums.EntityStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Builder;
 import lombok.Data;
 

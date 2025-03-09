@@ -22,6 +22,7 @@ public class TransactionDTO {
     private String customerId;
     private BigDecimal amount;
     private String transactionReference;
+    private String accountNumber;
 
     private String narration;
     private TransactionType transactionType;

@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Author ABODE
  * @Date 2025/03/08 10:12 PM
@@ -23,6 +25,11 @@ public class TransactionServiceImpl implements TransactionService {
     public TransactionDTO processTransaction(TransactionDTO transactionDTO) {
         Transaction transaction = transactionRepository.save(convertDataToEntity(transactionDTO));
         return convertEntityToData(transaction);
+    }
+
+    @Override
+    public List<TransactionDTO> getCustomerTransactions(String customerId) {
+        return transactionRepository.findByCustomerId(customerId).stream().map(this::convertEntityToData).toList();
     }
 
     private TransactionDTO convertEntityToData(Transaction entity) {

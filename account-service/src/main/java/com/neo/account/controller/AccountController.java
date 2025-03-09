@@ -3,8 +3,8 @@ package com.neo.account.controller;
 import com.neo.account.converter.AccountServiceConverter;
 import com.neo.account.dto.AccountCreationRequest;
 import com.neo.account.dto.AccountCreationResponse;
-import com.neo.account.dto.CustomerAccountDTO;
 import com.neo.account.service.AccountService;
+import com.neo.common.dto.CustomerAccountDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -30,8 +30,8 @@ public class AccountController {
         return accountService.getAccounts();
     }
 
-    @GetMapping("/{customerId}")
-    public List<CustomerAccountDTO> getCustomerAccounts(@PathVariable String customerId){
+    @GetMapping("")
+    public List<CustomerAccountDTO> getCustomerAccounts(@RequestParam("customerId") String customerId){
         return accountService.getCustomerAccounts(customerId);
     }
 

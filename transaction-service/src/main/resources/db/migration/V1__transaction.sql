@@ -3,6 +3,7 @@ CREATE TABLE transaction (
       customer_id VARCHAR(25) NOT NULL,
       amount DECIMAL(18,2) NOT NULL,
       transaction_reference VARCHAR(50) UNIQUE NOT NULL,
+      account_number VARCHAR(25) NOT NULL,
       narration TEXT,
       transaction_type VARCHAR(20) NOT NULL,  -- Adjust ENUM values based on your TransactionType enum
       fee DECIMAL(18,2),

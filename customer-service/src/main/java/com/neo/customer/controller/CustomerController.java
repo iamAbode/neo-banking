@@ -3,6 +3,7 @@ package com.neo.customer.controller;
 import com.neo.common.dto.CustomerDTO;
 import com.neo.customer.converter.CustomerServiceConverter;
 import com.neo.customer.dto.CustomerCreationRequest;
+import com.neo.customer.dto.CustomerInformationResponse;
 import com.neo.customer.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,10 @@ public class CustomerController {
     @PostMapping("")
     public CustomerDTO createCustomer(@Valid @RequestBody CustomerCreationRequest request){
         return customerService.createCustomer(customerServiceConverter.convert(request));
+    }
+
+    @GetMapping("/customer-information")
+    public CustomerInformationResponse getCustomerInfo(@RequestParam("customerId") String customerId){
+        return customerService.getCustomerInfo(customerId);
     }
 }

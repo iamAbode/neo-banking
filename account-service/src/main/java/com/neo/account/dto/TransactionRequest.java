@@ -1,5 +1,6 @@
 package com.neo.account.dto;
 
+import com.neo.common.enums.EntityStatus;
 import com.neo.common.enums.PaymentMethod;
 import com.neo.common.enums.TransactionType;
 import lombok.Builder;
@@ -17,7 +18,7 @@ public class TransactionRequest {
     private String customerId;
     private BigDecimal amount;
     private String transactionReference;
-
+    private String accountNumber;
     private String narration;
     private TransactionType transactionType;
 
@@ -28,4 +29,6 @@ public class TransactionRequest {
     private boolean settleInstantly;
 
     private PaymentMethod paymentMethod;
+
+    private EntityStatus status;
 }
