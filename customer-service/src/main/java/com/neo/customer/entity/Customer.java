@@ -3,10 +3,7 @@ package com.neo.customer.entity;
 import com.neo.common.entity.BaseEntity;
 import com.neo.common.enums.Gender;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 /**
@@ -14,6 +11,7 @@ import org.antlr.v4.runtime.misc.NotNull;
  * @Date 2025/03/07 9:53 PM
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Builder

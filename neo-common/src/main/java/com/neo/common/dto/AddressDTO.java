@@ -1,4 +1,4 @@
-package com.neo.customer.dto;
+package com.neo.common.dto;
 
 import lombok.Builder;
 import lombok.Data;

@@ -2,8 +2,13 @@ package com.neo.account.repository;
 
 import com.neo.account.entity.CustomerAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -13,5 +18,13 @@ import java.util.Optional;
 @Repository
 public interface CustomerAccountRepository extends JpaRepository<CustomerAccount, Long> {
 
-    Optional<CustomerAccount> findByCustomerId(String customerId);
+    Optional<CustomerAccount> findFirstByCustomerId(String customerId);
+
+    List<CustomerAccount> findByCustomerId(String customerId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE CustomerAccount c SET c.balance=?2 WHERE c.id=?1")
+    void updateBalance(Long id, BigDecimal balance);
+
 }

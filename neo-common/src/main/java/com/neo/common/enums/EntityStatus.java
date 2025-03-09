@@ -5,5 +5,5 @@ package com.neo.common.enums;
  * @Date 2025/03/07 9:27 PM
  */
 public enum EntityStatus {
-    ACTIVE,INACTIVE,DELETED
+    ACTIVE, INACTIVE, DELETED, BLOCKED, CLOSED, PENDING, COMPLETED, FAILED
 }

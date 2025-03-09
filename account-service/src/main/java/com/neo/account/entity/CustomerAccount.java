@@ -4,10 +4,7 @@ import com.neo.account.enums.AccountStatus;
 import com.neo.common.entity.BaseEntity;
 import com.neo.common.enums.AccountType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -16,6 +13,7 @@ import java.math.BigDecimal;
  * @Date 2025/03/08 1:09 PM
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @AllArgsConstructor
@@ -45,9 +43,5 @@ public class CustomerAccount extends BaseEntity {
 
     @Column
     private String branchCode;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private AccountStatus status;
 
 }

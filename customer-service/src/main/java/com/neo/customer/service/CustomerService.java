@@ -1,7 +1,6 @@
 package com.neo.customer.service;
 
-import com.neo.customer.dto.CustomerDTO;
-import com.neo.customer.entity.Customer;
+import com.neo.common.dto.CustomerDTO;
 
 import java.util.List;
 

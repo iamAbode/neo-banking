@@ -1,0 +1,22 @@
+INSERT INTO transaction (customer_id, amount, transaction_reference, narration, transaction_type, fee, currency, settle_instantly, payment_method, status, created_by, modified_by)
+VALUES
+    ('CUST001', 1000.50, 'TXN001A', 'Payment for order #1001', 'CREDIT', 10.00, 'USD', TRUE, 'CARD', 'COMPLETED', 'Admin', 'Admin'),
+    ('CUST001', 200.00, 'TXN001B', 'Refund for order #1002', 'DEBIT', 5.00, 'USD', FALSE, 'BANK_TRANSFER', 'PENDING', 'Admin', 'Admin'),
+    ('CUST002', 500.75, 'TXN002A', 'Subscription renewal', 'CREDIT', 8.50, 'EUR', TRUE, 'PAYPAL', 'COMPLETED', 'System', 'System'),
+    ('CUST002', 150.00, 'TXN002B', 'Partial refund', 'DEBIT', 2.00, 'EUR', FALSE, 'CARD', 'FAILED', 'Admin', 'Admin'),
+    ('CUST003', 300.25, 'TXN003A', 'Payment for order #2001', 'CREDIT', 3.00, 'USD', TRUE, 'CASH', 'COMPLETED', 'UserA', 'UserA'),
+    ('CUST004', 750.00, 'TXN004A', 'Service fee', 'DEBIT', 12.00, 'GBP', FALSE, 'BANK_TRANSFER', 'PENDING', 'Admin', 'Admin'),
+    ('CUST004', 250.00, 'TXN004B', 'Chargeback', 'DEBIT', 6.50, 'GBP', FALSE, 'PAYPAL', 'FAILED', 'UserB', 'UserB'),
+    ('CUST005', 1200.00, 'TXN005A', 'Investment deposit', 'CREDIT', 15.00, 'USD', TRUE, 'CARD', 'COMPLETED', 'System', 'System'),
+    ('CUST005', 800.00, 'TXN005B', 'Loan repayment', 'DEBIT', 10.00, 'USD', TRUE, 'BANK_TRANSFER', 'PENDING', 'UserC', 'UserC'),
+    ('CUST001', 430.75, 'TXN006A', 'Bill payment', 'CREDIT', 5.00, 'EUR', FALSE, 'CASH', 'COMPLETED', 'Admin', 'Admin'),
+    ('CUST002', 230.50, 'TXN006B', 'Insurance premium', 'DEBIT', 4.50, 'EUR', FALSE, 'BANK_TRANSFER', 'PENDING', 'Admin', 'Admin'),
+    ('CUST003', 600.00, 'TXN007A', 'Payment for services', 'CREDIT', 7.00, 'GBP', TRUE, 'CARD', 'COMPLETED', 'UserD', 'UserD'),
+    ('CUST004', 600.00, 'TXN007B', 'Payment for services', 'CREDIT', 7.00, 'GBP', TRUE, 'CARD', 'COMPLETED', 'UserD', 'UserD'),
+    ('CUST004', 980.25, 'TXN008A', 'Freelance project payment', 'CREDIT', 12.00, 'USD', TRUE, 'PAYPAL', 'PENDING', 'Admin', 'Admin'),
+    ('CUST003', 1150.00, 'TXN009A', 'Real estate payment', 'DEBIT', 20.00, 'USD', FALSE, 'BANK_TRANSFER', 'COMPLETED', 'Admin', 'Admin'),
+    ('CUST002', 400.00, 'TXN009B', 'Deposit for car purchase', 'CREDIT', 10.00, 'USD', TRUE, 'CARD', 'PENDING', 'UserE', 'UserE'),
+    ('CUST001', 400.00, 'TXN009C', 'Deposit for car purchase', 'CREDIT', 10.00, 'USD', TRUE, 'CARD', 'PENDING', 'UserE', 'UserE'),
+    ('CUST002', 275.00, 'TXN010A', 'Online purchase', 'DEBIT', 5.50, 'EUR', FALSE, 'PAYPAL', 'COMPLETED', 'Admin', 'Admin'),
+    ('CUST002', 275.00, 'TXN010B', 'Online purchase', 'DEBIT', 5.50, 'EUR', FALSE, 'PAYPAL', 'COMPLETED', 'Admin', 'Admin'),
+    ('CUST004', 150.50, 'TXN010C', 'Additional service fee', 'CREDIT', 3.00, 'GBP', TRUE, 'CASH', 'PENDING', 'UserF', 'UserF');

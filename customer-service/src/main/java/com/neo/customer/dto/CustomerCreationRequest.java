@@ -1,5 +1,6 @@
 package com.neo.customer.dto;
 
+import com.neo.common.dto.AddressDTO;
 import com.neo.common.enums.EntityStatus;
 import com.neo.common.enums.Gender;
 import jakarta.validation.constraints.*;
@@ -12,7 +13,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class CustomerDTO {
+public class CustomerCreationRequest {
 
     @NotBlank(message = "Customer ID is required")
     private String customerId;

@@ -1,18 +1,17 @@
 package com.neo.account.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 /**
  * @Author ABODE
- * @Date 2025/03/08 1:00 PM
+ * @Date 2025/03/08 1:48 PM
  */
 @Data
-public class AccountCreationRequest {
-
-    @JsonProperty("customerID")
+@Builder
+public class AccountCreationServiceParam {
     private String customerId;
     private BigDecimal initialCredit;
 }

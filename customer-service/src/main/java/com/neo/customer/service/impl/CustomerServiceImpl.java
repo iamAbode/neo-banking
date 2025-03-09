@@ -1,15 +1,13 @@
 package com.neo.customer.service.impl;
 
+import com.neo.common.dto.AddressDTO;
+import com.neo.common.dto.CustomerDTO;
 import com.neo.common.exception.ResourceNotFoundException;
-import com.neo.customer.dto.AddressDTO;
-import com.neo.customer.dto.CustomerDTO;
 import com.neo.customer.entity.Address;
 import com.neo.customer.entity.Customer;
 import com.neo.customer.repository.CustomerRepository;
 import com.neo.customer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
