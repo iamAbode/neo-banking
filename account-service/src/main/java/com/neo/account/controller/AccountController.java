@@ -4,6 +4,7 @@ import com.neo.account.converter.AccountServiceConverter;
 import com.neo.account.dto.AccountCreationRequest;
 import com.neo.account.dto.AccountCreationResponse;
 import com.neo.account.service.AccountService;
+import com.neo.common.annotation.WrapResponse;
 import com.neo.common.dto.CustomerAccountDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @Validated
+@WrapResponse
 @RequestMapping("/api/account")
 @RequiredArgsConstructor
 public class AccountController {

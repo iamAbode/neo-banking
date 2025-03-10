@@ -1,5 +1,6 @@
 package com.neo.account.client;
 
+import com.neo.account.config.ApiServicePath;
 import com.neo.account.dto.TransactionRequest;
 import com.neo.common.dto.TransactionDTO;
 import com.neo.common.response.BaseResponse;
@@ -20,18 +21,17 @@ import org.springframework.web.client.RestClient;
 @Component
 public class TransactionServiceClient {
 
-    @Value("${inventory.service.url:http://localhost:8083}")
-    private String transactionServiceUrl;
+    private final ApiServicePath apiServicePath;
 
     private final RestClient restClient;
 
     public BaseResponse<TransactionDTO> processTransaction(TransactionRequest request) {
         return restClient.mutate()
-                .baseUrl(transactionServiceUrl)
+                .baseUrl(apiServicePath.getTransaction().getBaseUrl())
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .build()
                 .post()
-                .uri("/api/transaction")
+                .uri(apiServicePath.getTransaction().getRelativePath())
                 .body(request) // Pass the request body
                 .retrieve()
                 .body(new ParameterizedTypeReference<BaseResponse<TransactionDTO>>() {});

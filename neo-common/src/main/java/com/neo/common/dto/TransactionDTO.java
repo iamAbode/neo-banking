@@ -6,8 +6,10 @@ import com.neo.common.enums.TransactionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -15,6 +17,8 @@ import java.math.BigDecimal;
  * @Author ABODE
  * @Date 2025/03/08 10:05 PM
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Builder
 public class TransactionDTO {

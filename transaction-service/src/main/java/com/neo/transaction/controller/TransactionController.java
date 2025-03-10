@@ -1,5 +1,6 @@
 package com.neo.transaction.controller;
 
+import com.neo.common.annotation.WrapResponse;
 import com.neo.common.dto.CustomerAccountDTO;
 import com.neo.common.dto.CustomerDTO;
 import com.neo.common.dto.TransactionDTO;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @Validated
+@WrapResponse
 @RequestMapping("/api/transaction")
 @RequiredArgsConstructor
 public class TransactionController {

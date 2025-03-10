@@ -1,5 +1,6 @@
-package com.neo.transaction.advice;
+package com.neo.common.advice;
 
+import com.neo.common.annotation.WrapResponse;
 import com.neo.common.exception.ResourceNotFoundException;
 import com.neo.common.response.BaseResponse;
 import org.springframework.core.MethodParameter;
@@ -15,10 +16,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
  * @Author ABODE
- * @Date 2025/03/09 8:52 AM
+ * @Date 2025/03/08 12:44 PM
  */
-@ControllerAdvice
-public class TransactionResponseHandler implements ResponseBodyAdvice<Object> {
+
+@ControllerAdvice(annotations = WrapResponse.class)
+public class NeoResponseHandler implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -61,5 +63,4 @@ public class TransactionResponseHandler implements ResponseBodyAdvice<Object> {
     public ResponseEntity<BaseResponse<String>> handleGlobalException(Exception ex) {
         return new ResponseEntity<>(new BaseResponse<>("500", false, ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }

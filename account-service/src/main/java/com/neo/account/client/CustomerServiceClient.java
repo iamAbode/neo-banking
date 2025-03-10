@@ -1,5 +1,6 @@
 package com.neo.account.client;
 
+import com.neo.account.config.ApiServicePath;
 import com.neo.common.dto.CustomerDTO;
 import com.neo.common.response.BaseResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +17,16 @@ import org.springframework.web.client.RestClient;
 @Component
 public class CustomerServiceClient {
 
-    @Value("${inventory.service.url:http://localhost:8081}")
-    private String customerServiceUrl;
+    private final ApiServicePath apiServicePath;
 
     private final RestClient restClient;
 
     public BaseResponse<CustomerDTO> getCustomer(String customerId) {
         return restClient.mutate()
-                .baseUrl(customerServiceUrl)
+                .baseUrl(apiServicePath.getCustomer().getBaseUrl())
                 .build()
                 .get()
-                .uri("/api/customer?customerId=" + customerId)
+                .uri(apiServicePath.getCustomer().getRelativePath() + customerId)
                 .retrieve()
                 .body(new ParameterizedTypeReference<BaseResponse<CustomerDTO>>() {});
     }

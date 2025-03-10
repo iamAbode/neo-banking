@@ -4,14 +4,18 @@ import com.neo.common.dto.AddressDTO;
 import com.neo.common.enums.EntityStatus;
 import com.neo.common.enums.Gender;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Author ABODE
  * @Date 2025/03/08 10:09 AM
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class CustomerCreationRequest {
 

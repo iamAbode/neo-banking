@@ -1,5 +1,6 @@
 package com.neo.customer.controller;
 
+import com.neo.common.annotation.WrapResponse;
 import com.neo.common.dto.CustomerDTO;
 import com.neo.customer.converter.CustomerServiceConverter;
 import com.neo.customer.dto.CustomerCreationRequest;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @Validated
+@WrapResponse
 @RequestMapping("/api/customer")
 @RequiredArgsConstructor
 public class CustomerController {
