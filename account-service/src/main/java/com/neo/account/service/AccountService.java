@@ -12,8 +12,6 @@ import java.util.List;
  */
 public interface AccountService {
 
-    List<CustomerAccountDTO> getAccounts();
-
     List<CustomerAccountDTO> getCustomerAccounts(String customerId);
 
     AccountCreationResponse createAccount(AccountCreationServiceParam serviceParam);

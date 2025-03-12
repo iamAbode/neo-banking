@@ -27,11 +27,6 @@ public class CustomerController {
     private final CustomerService customerService;
     private final CustomerServiceConverter customerServiceConverter;
 
-    @GetMapping("/all")
-    public List<CustomerDTO> getCustomers(){
-        return customerService.getCustomers();
-    }
-
     @GetMapping("")
     public CustomerDTO getCustomer(@RequestParam("customerId") String customerId){
         return customerService.getCustomer(customerId);

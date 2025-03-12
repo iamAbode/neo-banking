@@ -33,7 +33,7 @@ public class KafkaNotificationService implements NotificationService {
         if (isKafkaAvailable()) {
             log.info("Start - Sending accountCreationEvent {} to Kafka topic account-creation", message);
             kafkaTemplate.send(topic, message);
-            log.info("End - Sending accountCreationEvent {} to Kafka topic account-creation", message);
+            log.info("End - Complete accountCreationEvent {} to Kafka topic account-creation", message);
         } else {
             log.info("Kafka is unavailable. Message not sent.");
         }

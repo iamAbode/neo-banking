@@ -29,7 +29,7 @@ public class TransactionController {
     private final TransactionServiceConverter transactionServiceConverter;
 
     @GetMapping("")
-    public List<TransactionDTO> getCustomerAccounts(@RequestParam("customerId") String customerId){
+    public List<TransactionDTO> getCustomerTransactions(@RequestParam("customerId") String customerId){
         return transactionService.getCustomerTransactions(customerId);
     }
     @PostMapping("")

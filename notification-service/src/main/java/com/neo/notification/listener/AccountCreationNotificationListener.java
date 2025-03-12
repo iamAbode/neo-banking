@@ -28,7 +28,8 @@ public class AccountCreationNotificationListener {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("springshop@email.com");
-            messageHelper.setTo(accountCreationEvent.getEmail().toString());
+            //messageHelper.setTo(accountCreationEvent.getEmail().toString());
+            messageHelper.setTo("abodecyburg@gmail.com");
             messageHelper.setSubject("New Account Opening");
             messageHelper.setText(String.format("""
                             Hi %s,%s

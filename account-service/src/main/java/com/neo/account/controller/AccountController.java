@@ -27,11 +27,6 @@ public class AccountController {
     private final AccountService accountService;
     private final AccountServiceConverter accountServiceConverter;
 
-    @GetMapping("/all")
-    public List<CustomerAccountDTO> getAccount(){
-        return accountService.getAccounts();
-    }
-
     @GetMapping("")
     public List<CustomerAccountDTO> getCustomerAccounts(@RequestParam("customerId") String customerId){
         return accountService.getCustomerAccounts(customerId);

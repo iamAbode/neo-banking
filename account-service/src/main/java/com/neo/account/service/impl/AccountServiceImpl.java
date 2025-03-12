@@ -47,11 +47,6 @@ public class AccountServiceImpl implements AccountService {
     private final NotificationService kafkaNotificationService;
 
     @Override
-    public List<CustomerAccountDTO> getAccounts() {
-        return accountRepository.findAll().stream().map(this::convertEntityToData).toList();
-    }
-
-    @Override
     public List<CustomerAccountDTO> getCustomerAccounts(String customerId) {
         return accountRepository.findByCustomerId(customerId)
                 .stream().map(this::convertEntityToData).toList();

@@ -1,11 +1,17 @@
 package com.neo.customer.controller;
 
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.neo.common.dto.AccountTransactionsDTO;
+import com.neo.common.dto.AddressDTO;
 import com.neo.common.dto.CustomerDTO;
+import com.neo.common.dto.TransactionDTO;
+import com.neo.common.enums.EntityStatus;
+import com.neo.common.enums.Gender;
+import com.neo.common.enums.PaymentMethod;
+import com.neo.common.enums.TransactionType;
 import com.neo.customer.converter.CustomerServiceConverter;
 import com.neo.customer.dto.CustomerCreationRequest;
 import com.neo.customer.dto.CustomerInformationResponse;
@@ -16,12 +22,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 
@@ -43,8 +50,9 @@ public class CustomerControllerTest {
     @InjectMocks
     private CustomerController customerController;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    private String customerId = "CUST001";
 
     @BeforeEach
     void setup() {
@@ -52,52 +60,95 @@ public class CustomerControllerTest {
     }
 
     @Test
-    void testGetCustomers() throws Exception {
-        List<CustomerDTO> customers = Arrays.asList(new CustomerDTO("1", "John Doe"));
-        when(customerService.getCustomers()).thenReturn(customers);
-
-        mockMvc.perform(get("/all"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()").value(1))
-                .andExpect(jsonPath("$[0].id").value("1"))
-                .andExpect(jsonPath("$[0].name").value("John Doe"));
-    }
-
-    @Test
     void testGetCustomer() throws Exception {
-        CustomerDTO customer = new CustomerDTO("1", "John Doe");
-        when(customerService.getCustomer("1")).thenReturn(customer);
+        CustomerDTO customer = createMockCustomer(customerId);
+        when(customerService.getCustomer(customerId)).thenReturn(customer);
 
-        mockMvc.perform(get("/").param("customerId", "1"))
+        mockMvc.perform(get("/api/customer").param("customerId", customerId))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value("1"))
-                .andExpect(jsonPath("$.name").value("John Doe"));
+                .andExpect(jsonPath("$.customerId").value(customerId))
+                .andExpect(jsonPath("$.name").value("Bukola"));
     }
 
     @Test
     void testCreateCustomer() throws Exception {
-        CustomerCreationRequest request = new CustomerCreationRequest("John Doe");
-        CustomerDTO customerDTO = new CustomerDTO("1", "John Doe");
+        CustomerCreationRequest request = createMockCustomerCreationRequest();
+        CustomerDTO customerDTO = createMockCustomer(customerId);
         when(customerServiceConverter.convert(request)).thenReturn(customerDTO);
         when(customerService.createCustomer(customerDTO)).thenReturn(customerDTO);
 
-        mockMvc.perform(post("/")
+        mockMvc.perform(post("/api/customer")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value("1"))
-                .andExpect(jsonPath("$.name").value("John Doe"));
+                .andExpect(jsonPath("$.customerId").value(customerId))
+                .andExpect(jsonPath("$.name").value("Bukola"));
     }
 
     @Test
     void testGetCustomerInfo() throws Exception {
-        CustomerInformationResponse response = new CustomerInformationResponse("1", "John Doe", "Premium");
-        when(customerService.getCustomerInfo("1")).thenReturn(response);
+        CustomerInformationResponse response = createMockCustomerInformationResponse();
+        when(customerService.getCustomerInfo(customerId)).thenReturn(response);
 
-        mockMvc.perform(get("/customer-information").param("customerId", "1"))
+        mockMvc.perform(get("/api/customer/customer-information").param("customerId", customerId))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.customerId").value("1"))
-                .andExpect(jsonPath("$.name").value("John Doe"))
-                .andExpect(jsonPath("$.status").value("Premium"));
+                .andExpect(jsonPath("$.totalBalance").value("1500.75"))
+                .andExpect(jsonPath("$.name").value("Bukola"))
+                .andExpect(jsonPath("$.surname").value("Doe"));
     }
+
+
+    private CustomerDTO createMockCustomer(String customerId) {
+        return new CustomerDTO(
+                customerId,
+                "Bukola",
+                "Doe",
+                "bukola.doe@example.com",
+                "+1234567890",
+                Gender.MALE,
+                new AddressDTO("123 Main St", "City", "State", "12345", "Country"),
+                EntityStatus.ACTIVE
+        );
+    }
+
+    private CustomerCreationRequest createMockCustomerCreationRequest() {
+        return new CustomerCreationRequest(
+                UUID.randomUUID().toString(),
+                "Bukola",
+                "Doe",
+                "bukola.doe@example.com",
+                "1234567890",
+                Gender.MALE,
+                new AddressDTO("456 Elm St", "Town", "Region", "67890", "Country"),
+                EntityStatus.PENDING
+        );
+    }
+
+    private CustomerInformationResponse createMockCustomerInformationResponse() {
+        return new CustomerInformationResponse(
+                "Bukola",
+                "Doe",
+                BigDecimal.valueOf(1500.75),
+                Arrays.asList(
+                    new AccountTransactionsDTO("1234567890", BigDecimal.valueOf(750.25),
+                        Arrays.asList(
+                            new TransactionDTO(
+                                "1",
+                                BigDecimal.valueOf(250.00),
+                                UUID.randomUUID().toString(),
+                                "1234567890",
+                                "Payment for services",
+                                TransactionType.DEBIT,
+                                BigDecimal.valueOf(5.00),
+                                "USD",
+                                true,
+                                PaymentMethod.CARD,
+                                EntityStatus.ACTIVE
+                            )
+                        )
+                    )
+                )
+        );
+    }
+
 }
