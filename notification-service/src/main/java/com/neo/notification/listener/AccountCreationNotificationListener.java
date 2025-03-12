@@ -27,12 +27,12 @@ public class AccountCreationNotificationListener {
 
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom("springshop@email.com");
-            //messageHelper.setTo(accountCreationEvent.getEmail().toString());
-            messageHelper.setTo("abodecyburg@gmail.com");
+            messageHelper.setFrom("account_service@neobank.com");
+            messageHelper.setTo(accountCreationEvent.getEmail().toString());
+            //messageHelper.setTo("abodecyburg@gmail.com");
             messageHelper.setSubject("New Account Opening");
             messageHelper.setText(String.format("""
-                            Hi %s,%s
+                            Hi %s, %s
 
                             Your current account number %s is now opened.
                             

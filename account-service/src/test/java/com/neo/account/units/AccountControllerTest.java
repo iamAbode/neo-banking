@@ -2,10 +2,6 @@ package com.neo.account.units;
 
 import com.neo.account.controller.AccountController;
 import com.neo.account.converter.AccountServiceConverter;
-import com.neo.account.dto.AccountCreationRequest;
-import com.neo.account.dto.AccountCreationResponse;
-import com.neo.account.dto.AccountCreationServiceParam;
-import com.neo.account.entity.CustomerAccount;
 import com.neo.account.service.AccountService;
 import com.neo.common.dto.CustomerAccountDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,13 +10,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
