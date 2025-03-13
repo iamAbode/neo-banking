@@ -23,7 +23,6 @@ import com.neo.common.response.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -65,17 +64,17 @@ public class AccountServiceImpl implements AccountService {
             updateAccountBalance(account);
         }
         notityCustomer(account, customerDTO);
-        return getAccountResponse(account, customerDTO);
+        return mapToResponse(account, customerDTO);
     }
 
-    private AccountCreationResponse getAccountResponse(CustomerAccount account, CustomerDTO customerDTO) {
+    private AccountCreationResponse mapToResponse(CustomerAccount account, CustomerDTO customerDTO) {
         AccountCreationResponse response = AccountCreationResponse.builder().build();
         BeanUtils.copyProperties(account, response);
-        response.setFullName(getFullName(customerDTO));
+        response.setFullName(formatFullName(customerDTO));
         return response;
     }
 
-    private String getFullName(CustomerDTO customerDTO) {
+    private String formatFullName(CustomerDTO customerDTO) {
         return String.format("%s %s", customerDTO.getName(), customerDTO.getSurname());
     }
 

@@ -1,4 +1,4 @@
-const baseUrl = "https://api-gateway:9090/api";
+const baseUrl = "http://localhost:9090/api";
 
 export async function getToken(username, password) {
   const response = await fetch(`${baseUrl}/identity/generateToken`, {

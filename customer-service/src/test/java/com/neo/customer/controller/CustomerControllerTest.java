@@ -44,7 +44,7 @@ public class CustomerControllerTest {
     @Mock
     private CustomerService customerService;
 
-    @Mock
+    @InjectMocks
     private CustomerServiceConverter customerServiceConverter;
 
     @InjectMocks

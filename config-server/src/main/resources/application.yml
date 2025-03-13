@@ -8,6 +8,10 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/iamAbode/neo-config  # Replace with your GitHub repo URL
+          uri: https://github.com/iamAbode/neo-config
           default-label: main
-          #clone-on-start: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://service-registry:8761/eureka/}

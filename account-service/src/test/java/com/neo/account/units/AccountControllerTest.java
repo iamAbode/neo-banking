@@ -32,7 +32,7 @@ public class AccountControllerTest {
     @Mock
     private AccountService accountService;
 
-    @Mock
+    @InjectMocks
     private AccountServiceConverter accountServiceConverter;
 
     @InjectMocks

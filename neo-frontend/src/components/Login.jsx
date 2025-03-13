@@ -11,13 +11,9 @@ const LoginForm = ({ onSuccess }) => {
     setLoading(true);
     try {
       const response = await getToken(values.username, values.password);
-      if (response.status) {
-        localStorage.setItem("token", response.accessToken);
-        onSuccess(response.accessToken);
-        message.success("Login successful");
-      } else {
-        message.error("Login failed");
-      }
+      localStorage.setItem("token", response?.accessToken);
+      onSuccess(response?.accessToken);
+      message.success("Login successful");
     } catch (error) {
       console.error("Login failed:", error);
       message.error("Login failed");

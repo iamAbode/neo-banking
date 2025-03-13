@@ -161,6 +161,9 @@ services:
       - "3000:80"
     environment:
       - REACT_APP_API_GATEWAY_URL=http://api-gateway:9090
+    depends_on:
+      api-gateway:
+        condition: service_healthy
     restart: always
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:80" ]

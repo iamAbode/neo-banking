@@ -35,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers( "/api/identity/verify/**", "/api/identity/generateToken").permitAll()
+                .requestMatchers( "/api/identity/verify/**", "/api/identity/generateToken","/h2-console/**").permitAll()
                 .anyRequest().authenticated() // Protect all other endpoints
         );
         http.httpBasic(Customizer.withDefaults());
