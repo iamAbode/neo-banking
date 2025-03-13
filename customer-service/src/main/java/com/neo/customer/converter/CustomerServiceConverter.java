@@ -12,21 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerServiceConverter {
 
-    public <E, D> D convertEntityToData(E entity, Class<D> dtoClass) {
-        try {
-            D dto = dtoClass.getDeclaredConstructor().newInstance();
-            BeanUtils.copyProperties(entity, dto);
-            return dto;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to convert entity to DTO", e);
-        }
-    }
-
     public CustomerDTO convert(CustomerCreationRequest request){
         CustomerDTO customerDTO = CustomerDTO.builder().build();
         BeanUtils.copyProperties(request, customerDTO);
         return customerDTO;
     }
-
 
 }

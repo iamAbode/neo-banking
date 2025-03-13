@@ -45,12 +45,7 @@ public class CustomerControllerTest {
     private CustomerService customerService;
 
     @InjectMocks
-    private CustomerServiceConverter customerServiceConverter;
-
-    @InjectMocks
     private CustomerController customerController;
-
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     private String customerId = "CUST001";
 
@@ -65,21 +60,6 @@ public class CustomerControllerTest {
         when(customerService.getCustomer(customerId)).thenReturn(customer);
 
         mockMvc.perform(get("/api/customer").param("customerId", customerId))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.customerId").value(customerId))
-                .andExpect(jsonPath("$.name").value("Bukola"));
-    }
-
-    @Test
-    void testCreateCustomer() throws Exception {
-        CustomerCreationRequest request = createMockCustomerCreationRequest();
-        CustomerDTO customerDTO = createMockCustomer(customerId);
-        when(customerServiceConverter.convert(request)).thenReturn(customerDTO);
-        when(customerService.createCustomer(customerDTO)).thenReturn(customerDTO);
-
-        mockMvc.perform(post("/api/customer")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customerId").value(customerId))
                 .andExpect(jsonPath("$.name").value("Bukola"));

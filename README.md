@@ -110,7 +110,7 @@ You can test the APIs using **Postman** or **cURL**. Ensure all services are run
 
 ## 📜 License
 
-This project is open-source and available under the [MIT License](LICENSE).
+This project is open-source and available under licence.
 
 ---
 
