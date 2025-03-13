@@ -64,6 +64,7 @@ public class CustomerServiceImplTest {
         customer.setName("Bukola");
     }
 
+
     @Test
     void testGetCustomerInfo_CustomerNotFound() {
         when(customerRepository.findByCustomerId("CUST002")).thenReturn(Optional.empty());
